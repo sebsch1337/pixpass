@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import { cn } from "@/utils/cn";
+
 import "./globals.css";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +21,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={cn("bg-sky-100 min-h-dvh flex flex-col", inter.className)}>
+				<Header />
+				{children}
+				<Footer />
+			</body>
 		</html>
 	);
 }
