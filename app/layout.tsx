@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn("bg-sky-100 min-h-dvh flex flex-col", inter.className)}>
+			<body className={cn("bg-sky-100 text-sky-950 min-h-dvh flex flex-col", inter.className)}>
 				<Header />
 				{children}
 				<Footer />
