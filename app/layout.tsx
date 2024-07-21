@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 
 import { cn } from "@/utils/cn";
 
@@ -23,8 +24,9 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={cn("bg-sky-100 text-sky-950 min-h-dvh flex flex-col", inter.className)}>
 				<Header />
-				{children}
+				<main className="flex-grow container mx-auto">{children}</main>
 				<Footer />
+				<Toaster richColors />
 			</body>
 		</html>
 	);
