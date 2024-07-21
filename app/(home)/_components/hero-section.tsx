@@ -1,6 +1,7 @@
 import { Button } from "@/components/button";
 
 import { HeroImageCollage } from "./hero-image-collage";
+import Link from "next/link";
 
 export const HeroSection = () => {
 	return (
@@ -28,8 +29,15 @@ export const HeroSection = () => {
 				</div>
 
 				<div className="">
-					<Button variant="flat">Start now</Button>
-					<p className="text-xs font-light text-sky-950 mt-2">1 picture free - Unlimited for 4.99$ / month!</p>
+					<Link href="/tool">
+						<Button
+							variant="flat"
+							hero
+						>
+							Start now
+						</Button>
+					</Link>
+					<p className="text-xs font-light text-sky-950 mt-2">1 picture free - 3 for only 4.99$!</p>
 				</div>
 			</div>
 
