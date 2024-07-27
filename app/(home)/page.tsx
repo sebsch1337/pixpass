@@ -4,10 +4,10 @@ import { HeroSection } from "./_components/hero-section";
 export default function Home() {
 	return (
 		<>
-			<div className="max-w-5xl px-8 mx-auto">
+			<div className="max-w-5xl mx-auto">
 				<HeroSection />
 			</div>
-			<div className="max-w-5xl px-8 mx-auto mt-4 md:mt-14">
+			<div className="max-w-5xl mx-auto mt-4 md:mt-14">
 				<FeaturesSection />
 			</div>
 		</>
