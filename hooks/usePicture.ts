@@ -1,11 +1,15 @@
 import { create } from "zustand";
 
 type Store = {
-	picture: string | null;
-	setPicture: (uploadedPicture: string | null) => void;
+	picture: string;
+	printPicture: string;
+	setPicture: (pictureData: string) => void;
+	setPrintPicture: (pictureData: string) => void;
 };
 
 export const usePicture = create<Store>()((set) => ({
-	picture: null,
-	setPicture: (uploadedPicture) => set(() => ({ picture: uploadedPicture })),
+	picture: "",
+	printPicture: "",
+	setPicture: (pictureData) => set(() => ({ picture: pictureData })),
+	setPrintPicture: (pictureData) => set(() => ({ printPicture: pictureData })),
 }));

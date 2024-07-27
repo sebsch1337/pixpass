@@ -1,6 +1,6 @@
-export const ToolInfoBox = () => {
+export const ToolUploadInfo = () => {
 	return (
-		<section className="rounded-xl bg-sky-200 flex flex-col h-full p-8">
+		<div>
 			<h2 className="text-lg font-semibold mb-2">Requirements</h2>
 			<div className="text-sm">
 				<p>Our requirements for your picture are:</p>
@@ -10,8 +10,8 @@ export const ToolInfoBox = () => {
 					<li>File type: JPG, PNG or WEBP</li>
 				</ul>
 				<br />
-				<p>Please check the exact requirements for your purpose.</p>
+				<p>Passport photos are subject to further requirements based on the desired service.</p>
 			</div>
-		</section>
+		</div>
 	);
 };

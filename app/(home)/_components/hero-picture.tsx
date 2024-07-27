@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-interface HeroImageProps {
+interface HeroPictureProps {
 	persona: "child" | "man" | "woman";
 }
 
-export const HeroImage = ({ persona }: HeroImageProps) => {
+export const HeroPicture = ({ persona }: HeroPictureProps) => {
 	return (
 		<Image
 			src={`/hero-${persona}-35.webp`}
