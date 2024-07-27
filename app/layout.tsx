@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn("bg-sky-100 text-sky-950 min-h-dvh flex flex-col", inter.className)}>
+			<body className={cn("bg-sky-50 text-sky-950 min-h-dvh flex flex-col", inter.className)}>
 				<Header />
 				<main className="flex-grow container mx-auto">{children}</main>
 				<Footer />
