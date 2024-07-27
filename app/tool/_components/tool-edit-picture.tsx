@@ -36,7 +36,7 @@ export const ToolEditPicture = () => {
 				<div className="relative w-full h-[50vh]">
 					{(!pictureFormat || !printFormat) && (
 						<div className="absolute top-0 left-0 w-full h-full bg-black/50 z-10 flex justify-center items-center">
-							<p className="text-sky-50 font-semibold text-xl m-auto">Select the dimensions to cut out</p>
+							<p className="text-sky-50 font-semibold text-xl text-center m-auto">Select the dimensions to cut out</p>
 						</div>
 					)}
 					<Cropper
