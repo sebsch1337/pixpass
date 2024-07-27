@@ -1,7 +1,8 @@
-import { Button } from "@/components/button";
-
-import { HeroImageCollage } from "./hero-image-collage";
 import Link from "next/link";
+
+import { PrintPicture } from "@/components/print-picture";
+
+import { Button } from "@/components/ui/button";
 
 export const HeroSection = () => {
 	return (
@@ -25,7 +26,7 @@ export const HeroSection = () => {
 				</div>
 
 				<div className="my-4 w-4/5 relative md:hidden">
-					<HeroImageCollage />
+					<PrintPicture />
 				</div>
 
 				<div className="">
@@ -42,7 +43,7 @@ export const HeroSection = () => {
 			</div>
 
 			<div className="w-1/2 relative hidden md:block">
-				<HeroImageCollage />
+				<PrintPicture />
 			</div>
 		</section>
 	);
