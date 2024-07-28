@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
 	return (
 		<footer className="p-8 flex flex-col items-center justify-center gap-2">
 			<p>Made with 🍣</p>

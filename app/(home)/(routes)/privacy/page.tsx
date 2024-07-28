@@ -1,4 +1,4 @@
-const PrivacyPage = () => {
+const PrivacyPage: React.FC = () => {
 	return (
 		<div>
 			<h1 className="text-3xl mb-2 font-semibold">Privacy Policy</h1>

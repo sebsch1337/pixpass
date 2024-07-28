@@ -12,7 +12,7 @@ import { ToolEditFormat } from "./_components/tool-edit-format";
 import { ToolEditPicture } from "./_components/tool-edit-picture";
 import { ToolPictureAiCheck } from "./_components/tool-picture-ai-check";
 
-export default function Tool() {
+const ToolPage: React.FC = () => {
 	const { progress } = useProgress();
 
 	useEffect(() => {
@@ -57,4 +57,6 @@ export default function Tool() {
 			</div>
 		</>
 	);
-}
+};
+
+export default ToolPage;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Navigation = () => {
+export const Navigation: React.FC = () => {
 	return (
 		<nav className="text-lg font-semibold flex gap-10 items-center">
 			<Link

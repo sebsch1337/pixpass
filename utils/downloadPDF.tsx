@@ -5,7 +5,11 @@ import { PrintPDF } from "@/components/print-pdf";
 import { PictureFormat } from "@/types/pictureFormat";
 import { PrintFormat } from "@/types/printFormat";
 
-export const downloadPDF = async (croppedPicture: string, pictureFormat: PictureFormat, printFormat: PrintFormat) => {
+export const downloadPDF = async (
+	croppedPicture: string,
+	pictureFormat: PictureFormat,
+	printFormat: PrintFormat
+): Promise<void> => {
 	// Generate PDF blob
 	const blob = await pdf(
 		<PrintPDF
