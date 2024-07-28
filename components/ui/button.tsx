@@ -18,7 +18,7 @@ export const Button = ({ variant = "flat", hero = false, children, className, ..
 			className={cn(
 				variants[variant],
 				hero ? "py-4" : "py-2",
-				"w-full rounded-full border-2 font-semibold px-10 uppercase flex justify-center items-center",
+				"w-full rounded-full border-2 font-semibold px-10 uppercase flex justify-center items-center select-none",
 				className
 			)}
 			{...props}
