@@ -8,24 +8,9 @@ import { PrintPDF } from "@/components/print-pdf";
 import { PictureFormat } from "@/types/pictureFormat";
 import { PrintFormat } from "@/types/printFormat";
 
-// GlobalWorkerOptions.workerSrc = "./pdf.worker.mjs";
+GlobalWorkerOptions.workerSrc = "./pdf.worker.mjs";
 
-if (typeof Promise.withResolvers === "undefined") {
-	if (window)
-		// @ts-expect-error
-		window.Promise.withResolvers = function () {
-			let resolve, reject;
-			const promise = new Promise((res, rej) => {
-				resolve = res;
-				reject = rej;
-			});
-			return { promise, resolve, reject };
-		};
-}
-
-GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/legacy/build/pdf.worker.min.mjs", import.meta.url).toString();
-
-export const generateImage = async (
+export const generateImageFromPDF = async (
 	croppedPicture: string,
 	pictureFormat: PictureFormat,
 	printFormat: PrintFormat
@@ -78,7 +63,7 @@ export const downloadImage = async (
 	pictureFormat: PictureFormat,
 	printFormat: PrintFormat
 ): Promise<void> => {
-	const dataUrl: string = await generateImage(croppedPicture, pictureFormat, printFormat);
+	const dataUrl: string = await generateImageFromPDF(croppedPicture, pictureFormat, printFormat);
 	const link: HTMLAnchorElement = document.createElement("a");
 	link.href = dataUrl;
 	link.download = "document-image.jpg";
