@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Cropper, { Area } from "react-easy-crop";
 import { LucideBadgeAlert, LucideBadgeCheck } from "lucide-react";
 
@@ -14,17 +15,16 @@ import { usePicture } from "@/hooks/usePicture";
 
 import getCroppedImg from "@/utils/pictureCropUtils";
 
-import { useEffect, useState } from "react";
-
+// Static import not runnning on node <v22 ; Vercel is running on v20 ; using dynamic import below
 // import { downloadImage, generateImageFromPDF } from "@/utils/pictureGenUtils";
 
 export const ToolEditPicture = () => {
 	const { approved, message, setApproved, setMessage } = useAi();
 	const { pictureFormat, printFormat } = useFormats();
 	const { picture, setPrintPicture } = usePicture();
-	const { croppedPicture, croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } =
-		useCrop();
+	const { croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } = useCrop();
 
+	// Import downloadImage & generateImageFromPDF dynamically
 	const [downloadImage, setDownloadImage] = useState<null | typeof import("@/utils/pictureGenUtils").downloadImage>(null);
 	const [generateImageFromPDF, setGenerateImageFromPDF] = useState<
 		null | typeof import("@/utils/pictureGenUtils").generateImageFromPDF
@@ -32,20 +32,14 @@ export const ToolEditPicture = () => {
 
 	useEffect(() => {
 		const loadFunctions = async () => {
-			const modulea = await import("@/utils/pictureGenUtils");
-			setDownloadImage(() => modulea.downloadImage);
-			setGenerateImageFromPDF(() => modulea.generateImageFromPDF);
+			const pictureGenUtils = await import("@/utils/pictureGenUtils");
+			setDownloadImage(() => pictureGenUtils.downloadImage);
+			setGenerateImageFromPDF(() => pictureGenUtils.generateImageFromPDF);
 		};
 
 		loadFunctions();
 	}, []);
-
-	useEffect(() => {
-		if (downloadImage && generateImageFromPDF) {
-			// Use the functions here
-			console.log("Functions loaded:", downloadImage, generateImageFromPDF);
-		}
-	}, [downloadImage, generateImageFromPDF]);
+	// End dynamic import
 
 	const onCropComplete = useDebouncedCallback(async (croppedArea: Area, croppedAreaPixels: Area) => {
 		if (!picture) return;
@@ -112,7 +106,6 @@ export const ToolEditPicture = () => {
 						onZoomChange={setZoom}
 					/>
 				</div>
-				{/* <button onClick={() => downloadImage(croppedPicture, pictureFormat, printFormat)}>Download JPG</button> */}
 			</div>
 		</div>
 	);
