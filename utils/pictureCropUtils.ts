@@ -45,13 +45,13 @@ export default async function getCroppedImg(
 	pixelCrop: PixelCrop,
 	rotation: number = 0,
 	flip: Flip = { horizontal: false, vertical: false }
-): Promise<string | null> {
+): Promise<[string, string | null]> {
 	const image = await createImage(imageSrc);
 	const canvas = document.createElement("canvas");
 	const ctx = canvas.getContext("2d");
 
 	if (!ctx) {
-		return null;
+		return ["", null];
 	}
 
 	const rotRad = getRadianAngle(rotation);
@@ -76,7 +76,7 @@ export default async function getCroppedImg(
 	const croppedCtx = croppedCanvas.getContext("2d");
 
 	if (!croppedCtx) {
-		return null;
+		return ["", null];
 	}
 
 	// Set the size of the cropped canvas
@@ -97,10 +97,10 @@ export default async function getCroppedImg(
 	);
 
 	// As Base64 string
-	// return croppedCanvas.toDataURL('image/jpeg');
+	const base64String = croppedCanvas.toDataURL("image/jpeg");
 
-	// As a blob
-	return new Promise((resolve, reject) => {
+	// As a blob URL
+	const blobPromise = new Promise<string>((resolve, reject) => {
 		croppedCanvas.toBlob((file) => {
 			if (file) {
 				resolve(URL.createObjectURL(file));
@@ -109,4 +109,8 @@ export default async function getCroppedImg(
 			}
 		}, "image/jpeg");
 	});
+
+	const blobUrl = await blobPromise;
+
+	return [base64String, blobUrl];
 }
