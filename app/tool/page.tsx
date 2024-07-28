@@ -41,7 +41,7 @@ export default function Tool() {
 					</section>
 
 					<section className="flex-1 rounded-xl bg-sky-200 flex flex-col h-full p-8">
-						{progress === "upload" && <ToolPictureAiCheck />}
+						{/* {progress === "upload" && <ToolPictureAiCheck />} */}
 						{progress === "edit" && <ToolPictureAiCheck />}
 					</section>
 				</div>
