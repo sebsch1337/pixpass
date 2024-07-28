@@ -1,7 +1,11 @@
 "use client";
 
-import { useDebouncedCallback } from "@mantine/hooks";
 import Cropper, { Area } from "react-easy-crop";
+import { LucideBadgeAlert, LucideBadgeCheck } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+
+import { useDebouncedCallback } from "@mantine/hooks";
 
 import { useAi } from "@/hooks/useAi";
 import { useCrop } from "@/hooks/useCrop";
@@ -9,15 +13,39 @@ import { useFormats } from "@/hooks/useFormats";
 import { usePicture } from "@/hooks/usePicture";
 
 import getCroppedImg from "@/utils/pictureCropUtils";
-import { generateImage } from "@/utils/generateAndDownloadImage";
-import { LucideBadgeAlert, LucideBadgeCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
+import { useEffect, useState } from "react";
+
+import { downloadImage, generateImageFromPDF } from "@/utils/pictureGenUtils";
 
 export const ToolEditPicture = () => {
 	const { approved, message, setApproved, setMessage } = useAi();
 	const { pictureFormat, printFormat } = useFormats();
 	const { picture, setPrintPicture } = usePicture();
-	const { croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } = useCrop();
+	const { croppedPicture, croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } =
+		useCrop();
+
+	// const [downloadImage, setDownloadImage] = useState<null | typeof import("@/utils/pictureGenUtils").downloadImage>(null);
+	// const [generateImageFromPDF, setGenerateImageFromPDF] = useState<
+	// 	null | typeof import("@/utils/pictureGenUtils").generateImageFromPDF
+	// >(null);
+
+	// useEffect(() => {
+	// 	const loadFunctions = async () => {
+	// 		const modulea = await import("@/utils/pictureGenUtils");
+	// 		setDownloadImage(() => modulea.downloadImage);
+	// 		setGenerateImageFromPDF(() => modulea.generateImageFromPDF);
+	// 	};
+
+	// 	loadFunctions();
+	// }, []);
+
+	// useEffect(() => {
+	// 	if (downloadImage && generateImageFromPDF) {
+	// 		// Use the functions here
+	// 		console.log("Functions loaded:", downloadImage, generateImageFromPDF);
+	// 	}
+	// }, [downloadImage, generateImageFromPDF]);
 
 	const onCropComplete = useDebouncedCallback(async (croppedArea: Area, croppedAreaPixels: Area) => {
 		if (!picture) return;
@@ -27,8 +55,8 @@ export const ToolEditPicture = () => {
 			if (!croppedImageBase64 || !croppedImage) return;
 			setCroppedPicture(croppedImage);
 			setCroppedPictureBase64(croppedImageBase64);
-			if (pictureFormat && printFormat) {
-				const generatedPrintPicture = await generateImage(croppedImage, pictureFormat, printFormat);
+			if (pictureFormat && printFormat && generateImageFromPDF) {
+				const generatedPrintPicture = await generateImageFromPDF(croppedImage, pictureFormat, printFormat);
 				setPrintPicture(generatedPrintPicture);
 			}
 		} catch (e) {

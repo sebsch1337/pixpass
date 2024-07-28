@@ -4,7 +4,7 @@ import { useCrop } from "@/hooks/useCrop";
 import { useFormats } from "@/hooks/useFormats";
 import { usePicture } from "@/hooks/usePicture";
 
-import { downloadImage } from "@/utils/generateAndDownloadImage";
+import { downloadImage } from "@/utils/pictureGenUtils";
 
 export const ToolEditPreview = () => {
 	const { printPicture } = usePicture();
