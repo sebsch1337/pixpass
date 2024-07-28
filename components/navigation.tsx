@@ -4,16 +4,11 @@ export const Navigation = () => {
 	return (
 		<nav className="text-lg font-semibold flex gap-10 items-center">
 			<Link
-				href="/start"
+				href="https://www.scherbes.com/chat"
+				target="_blank"
 				className="hover:underline decoration-4 decoration-sky-600"
 			>
 				About
-			</Link>
-			<Link
-				href="/login"
-				className="hover:underline decoration-4 decoration-sky-600"
-			>
-				Login
 			</Link>
 		</nav>
 	);
