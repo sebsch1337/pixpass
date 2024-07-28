@@ -23,7 +23,12 @@ export const checkBiometricalPicture = async (
 		throw error;
 	}
 
-	const reply: AiMessage = JSON.parse(message);
-
-	return reply;
+	try {
+		const reply: AiMessage = JSON.parse(message);
+		return reply;
+	} catch (e) {
+		const error = new Error();
+		error.message = "Error receiving message.";
+		throw error;
+	}
 };
