@@ -58,7 +58,11 @@ export const generateImage = async (
 	}
 };
 
-export const downloadImage = async (croppedPicture: string, pictureFormat: PictureFormat, printFormat: PrintFormat) => {
+export const downloadImage = async (
+	croppedPicture: string,
+	pictureFormat: PictureFormat,
+	printFormat: PrintFormat
+): Promise<void> => {
 	const dataUrl: string = await generateImage(croppedPicture, pictureFormat, printFormat);
 	const link: HTMLAnchorElement = document.createElement("a");
 	link.href = dataUrl;

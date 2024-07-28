@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-export const Logo = () => {
+export const Logo: React.FC = () => {
 	return (
 		<Link
 			href="/"

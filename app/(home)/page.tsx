@@ -1,7 +1,7 @@
-import { FeaturesSection } from "./_components/features-section";
 import { HeroSection } from "./_components/hero-section";
+import { FeaturesSection } from "./_components/features-section";
 
-export default function Home() {
+const HomePage: React.FC = () => {
 	return (
 		<>
 			<div className="max-w-5xl mx-auto">
@@ -12,4 +12,6 @@ export default function Home() {
 			</div>
 		</>
 	);
-}
+};
+
+export default HomePage;

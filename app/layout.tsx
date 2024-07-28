@@ -4,9 +4,10 @@ import { Toaster } from "sonner";
 
 import { cn } from "@/utils/cn";
 
-import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +23,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn("bg-sky-50 text-sky-950 min-h-dvh flex flex-col", inter.className)}>
-				<Header />
-				<main className="flex-grow container mx-auto">{children}</main>
-				<Footer />
-				<Toaster richColors />
+			<body className={cn("bg-sky-50 text-sky-950", inter.className)}>
+				<div className=" min-h-dvh flex flex-col justify-center items-center md:container">
+					<Header />
+					<main className="flex-grow container mx-auto">{children}</main>
+					<Footer />
+					<Toaster richColors />
+				</div>
 			</body>
 		</html>
 	);

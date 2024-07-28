@@ -1,4 +1,4 @@
-export default function NotFound() {
+const NotFound: React.FC = () => {
 	return (
 		<div className="h-[calc(100dvh-12rem)] w-full flex flex-col justify-center items-center">
 			<h2 className="text-xl">
@@ -6,4 +6,6 @@ export default function NotFound() {
 			</h2>
 		</div>
 	);
-}
+};
+
+export default NotFound;

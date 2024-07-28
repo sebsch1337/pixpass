@@ -12,7 +12,7 @@ import { ToolEditFormat } from "./_components/tool-edit-format";
 import { ToolEditPicture } from "./_components/tool-edit-picture";
 import { ToolPictureAiCheck } from "./_components/tool-picture-ai-check";
 
-export default function Tool() {
+const ToolPage: React.FC = () => {
 	const { progress } = useProgress();
 
 	useEffect(() => {
@@ -41,7 +41,7 @@ export default function Tool() {
 					</section>
 
 					<section className="flex-1 rounded-xl bg-sky-200 flex flex-col h-full p-8">
-						{progress === "upload" && <ToolPictureAiCheck />}
+						{/* {progress === "upload" && <ToolPictureAiCheck />} */}
 						{progress === "edit" && <ToolPictureAiCheck />}
 					</section>
 				</div>
@@ -57,4 +57,6 @@ export default function Tool() {
 			</div>
 		</>
 	);
-}
+};
+
+export default ToolPage;

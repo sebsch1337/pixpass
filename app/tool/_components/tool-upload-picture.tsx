@@ -3,12 +3,15 @@
 import { toast } from "sonner";
 import { useRef, useState } from "react";
 
+import { useAi } from "@/hooks/useAi";
 import { useCrop } from "@/hooks/useCrop";
 import { usePicture } from "@/hooks/usePicture";
 
 export const ToolUploadPicture = () => {
-	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
+	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+	const { setMessage, setApproved } = useAi();
 	const { picture, setPicture } = usePicture();
 	const { setCroppedPicture, setCroppedArea, setCroppedPosition, setZoom } = useCrop();
 
@@ -47,6 +50,8 @@ export const ToolUploadPicture = () => {
 						setCroppedArea(null);
 						setCroppedPosition({ x: 0, y: 0 });
 						setZoom(1);
+						setMessage("");
+						setApproved(false);
 					}
 				};
 				img.src = result;
