@@ -8,7 +8,22 @@ import { PrintPDF } from "@/components/print-pdf";
 import { PictureFormat } from "@/types/pictureFormat";
 import { PrintFormat } from "@/types/printFormat";
 
-GlobalWorkerOptions.workerSrc = "./pdf.worker.mjs";
+// GlobalWorkerOptions.workerSrc = "./pdf.worker.mjs";
+
+if (typeof Promise.withResolvers === "undefined") {
+	if (window)
+		// @ts-expect-error
+		window.Promise.withResolvers = function () {
+			let resolve, reject;
+			const promise = new Promise((res, rej) => {
+				resolve = res;
+				reject = rej;
+			});
+			return { promise, resolve, reject };
+		};
+}
+
+GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/legacy/build/pdf.worker.min.mjs", import.meta.url).toString();
 
 export const generateImage = async (
 	croppedPicture: string,
