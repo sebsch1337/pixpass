@@ -16,7 +16,7 @@ import getCroppedImg from "@/utils/pictureCropUtils";
 
 import { useEffect, useState } from "react";
 
-import { downloadImage, generateImageFromPDF } from "@/utils/pictureGenUtils";
+// import { downloadImage, generateImageFromPDF } from "@/utils/pictureGenUtils";
 
 export const ToolEditPicture = () => {
 	const { approved, message, setApproved, setMessage } = useAi();
@@ -25,27 +25,27 @@ export const ToolEditPicture = () => {
 	const { croppedPicture, croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } =
 		useCrop();
 
-	// const [downloadImage, setDownloadImage] = useState<null | typeof import("@/utils/pictureGenUtils").downloadImage>(null);
-	// const [generateImageFromPDF, setGenerateImageFromPDF] = useState<
-	// 	null | typeof import("@/utils/pictureGenUtils").generateImageFromPDF
-	// >(null);
+	const [downloadImage, setDownloadImage] = useState<null | typeof import("@/utils/pictureGenUtils").downloadImage>(null);
+	const [generateImageFromPDF, setGenerateImageFromPDF] = useState<
+		null | typeof import("@/utils/pictureGenUtils").generateImageFromPDF
+	>(null);
 
-	// useEffect(() => {
-	// 	const loadFunctions = async () => {
-	// 		const modulea = await import("@/utils/pictureGenUtils");
-	// 		setDownloadImage(() => modulea.downloadImage);
-	// 		setGenerateImageFromPDF(() => modulea.generateImageFromPDF);
-	// 	};
+	useEffect(() => {
+		const loadFunctions = async () => {
+			const modulea = await import("@/utils/pictureGenUtils");
+			setDownloadImage(() => modulea.downloadImage);
+			setGenerateImageFromPDF(() => modulea.generateImageFromPDF);
+		};
 
-	// 	loadFunctions();
-	// }, []);
+		loadFunctions();
+	}, []);
 
-	// useEffect(() => {
-	// 	if (downloadImage && generateImageFromPDF) {
-	// 		// Use the functions here
-	// 		console.log("Functions loaded:", downloadImage, generateImageFromPDF);
-	// 	}
-	// }, [downloadImage, generateImageFromPDF]);
+	useEffect(() => {
+		if (downloadImage && generateImageFromPDF) {
+			// Use the functions here
+			console.log("Functions loaded:", downloadImage, generateImageFromPDF);
+		}
+	}, [downloadImage, generateImageFromPDF]);
 
 	const onCropComplete = useDebouncedCallback(async (croppedArea: Area, croppedAreaPixels: Area) => {
 		if (!picture) return;
@@ -112,6 +112,7 @@ export const ToolEditPicture = () => {
 						onZoomChange={setZoom}
 					/>
 				</div>
+				{/* <button onClick={() => downloadImage(croppedPicture, pictureFormat, printFormat)}>Download JPG</button> */}
 			</div>
 		</div>
 	);
