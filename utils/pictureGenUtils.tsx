@@ -10,7 +10,7 @@ import { PrintFormat } from "@/types/printFormat";
 
 GlobalWorkerOptions.workerSrc = "./pdf.worker.mjs";
 
-export const generateImage = async (
+export const generateImageFromPDF = async (
 	croppedPicture: string,
 	pictureFormat: PictureFormat,
 	printFormat: PrintFormat
@@ -63,7 +63,7 @@ export const downloadImage = async (
 	pictureFormat: PictureFormat,
 	printFormat: PrintFormat
 ): Promise<void> => {
-	const dataUrl: string = await generateImage(croppedPicture, pictureFormat, printFormat);
+	const dataUrl: string = await generateImageFromPDF(croppedPicture, pictureFormat, printFormat);
 	const link: HTMLAnchorElement = document.createElement("a");
 	link.href = dataUrl;
 	link.download = "document-image.jpg";

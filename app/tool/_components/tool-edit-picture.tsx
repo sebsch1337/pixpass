@@ -1,7 +1,12 @@
 "use client";
 
-import { useDebouncedCallback } from "@mantine/hooks";
+import { useEffect, useState } from "react";
 import Cropper, { Area } from "react-easy-crop";
+import { LucideBadgeAlert, LucideBadgeCheck } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+
+import { useDebouncedCallback } from "@mantine/hooks";
 
 import { useAi } from "@/hooks/useAi";
 import { useCrop } from "@/hooks/useCrop";
@@ -9,15 +14,32 @@ import { useFormats } from "@/hooks/useFormats";
 import { usePicture } from "@/hooks/usePicture";
 
 import getCroppedImg from "@/utils/pictureCropUtils";
-import { generateImage } from "@/utils/generateAndDownloadImage";
-import { LucideBadgeAlert, LucideBadgeCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
+// Static import not runnning on node <v22 ; Vercel is running on v20 ; using dynamic import below
+// import { downloadImage, generateImageFromPDF } from "@/utils/pictureGenUtils";
 
 export const ToolEditPicture = () => {
 	const { approved, message, setApproved, setMessage } = useAi();
 	const { pictureFormat, printFormat } = useFormats();
 	const { picture, setPrintPicture } = usePicture();
 	const { croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } = useCrop();
+
+	// Import downloadImage & generateImageFromPDF dynamically
+	const [downloadImage, setDownloadImage] = useState<null | typeof import("@/utils/pictureGenUtils").downloadImage>(null);
+	const [generateImageFromPDF, setGenerateImageFromPDF] = useState<
+		null | typeof import("@/utils/pictureGenUtils").generateImageFromPDF
+	>(null);
+
+	useEffect(() => {
+		const loadFunctions = async () => {
+			const pictureGenUtils = await import("@/utils/pictureGenUtils");
+			setDownloadImage(() => pictureGenUtils.downloadImage);
+			setGenerateImageFromPDF(() => pictureGenUtils.generateImageFromPDF);
+		};
+
+		loadFunctions();
+	}, []);
+	// End dynamic import
 
 	const onCropComplete = useDebouncedCallback(async (croppedArea: Area, croppedAreaPixels: Area) => {
 		if (!picture) return;
@@ -27,8 +49,8 @@ export const ToolEditPicture = () => {
 			if (!croppedImageBase64 || !croppedImage) return;
 			setCroppedPicture(croppedImage);
 			setCroppedPictureBase64(croppedImageBase64);
-			if (pictureFormat && printFormat) {
-				const generatedPrintPicture = await generateImage(croppedImage, pictureFormat, printFormat);
+			if (pictureFormat && printFormat && generateImageFromPDF) {
+				const generatedPrintPicture = await generateImageFromPDF(croppedImage, pictureFormat, printFormat);
 				setPrintPicture(generatedPrintPicture);
 			}
 		} catch (e) {
