@@ -4,8 +4,13 @@ import { uploadAndCheckOpenAI } from "@/lib/openAI";
 
 import { AiMessage } from "@/types/aiMessage";
 
-export const checkBiometricalPicture = async (base64Image: string, accessCode: FormDataEntryValue | null): Promise<AiMessage> => {
-	if (accessCode !== "aic135") {
+const accessCode = process.env.ACCESS_CODE;
+
+export const checkBiometricalPicture = async (
+	base64Image: string,
+	inputAccessCode: FormDataEntryValue | null
+): Promise<AiMessage> => {
+	if (inputAccessCode !== accessCode) {
 		const error = new Error();
 		error.message = "Wrong access code.";
 		throw error;
