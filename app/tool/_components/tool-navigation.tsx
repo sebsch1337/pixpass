@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 
 import { usePicture } from "@/hooks/usePicture";
@@ -44,7 +46,11 @@ export const ToolNavigation = () => {
 						Next &gt;
 					</Button>
 				)}
-				{progress === "download" && <Button onClick={() => setProgress("upload")}>Finish</Button>}
+				{progress === "download" && (
+					<Link href="/">
+						<Button>Finish</Button>
+					</Link>
+				)}
 			</div>
 		</>
 	);
