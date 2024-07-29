@@ -4,7 +4,7 @@ import { usePicture } from "@/hooks/usePicture";
 import { useProgress } from "@/hooks/useProgress";
 
 export const ToolNavigation = () => {
-	const { picture } = usePicture();
+	const { picture, printPicture } = usePicture();
 	const { progress, setProgress } = useProgress();
 
 	return (
@@ -36,7 +36,14 @@ export const ToolNavigation = () => {
 						Next &gt;
 					</Button>
 				)}
-				{progress === "edit" && <Button onClick={() => setProgress("download")}>Next &gt;</Button>}
+				{progress === "edit" && (
+					<Button
+						disabled={!!!printPicture}
+						onClick={() => setProgress("download")}
+					>
+						Next &gt;
+					</Button>
+				)}
 				{progress === "download" && <Button onClick={() => setProgress("upload")}>Finish</Button>}
 			</div>
 		</>
