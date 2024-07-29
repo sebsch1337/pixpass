@@ -16,7 +16,7 @@ import { usePicture } from "@/hooks/usePicture";
 import getCroppedImg from "@/utils/pictureCropUtils";
 
 // Static import not runnning on node <v22 ; Vercel is running on v20 ; using dynamic import below
-// import { downloadImage, generateImageFromPDF } from "@/utils/pictureGenUtils";
+// import { downloadJPG, generateImageFromPDF } from "@/utils/pictureGenUtils";
 
 export const ToolEditPicture = () => {
 	const { approved, message, setApproved, setMessage } = useAi();
@@ -25,8 +25,7 @@ export const ToolEditPicture = () => {
 	const { croppedPicture, croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } =
 		useCrop();
 
-	// Import downloadImage & generateImageFromPDF dynamically
-	const [downloadImage, setDownloadImage] = useState<null | typeof import("@/utils/pictureGenUtils").downloadJPG>(null);
+	// Import downloadJPG & generateImageFromPDF dynamically
 	const [generateImageFromPDF, setGenerateImageFromPDF] = useState<
 		null | typeof import("@/utils/pictureGenUtils").generateImageFromPDF
 	>(null);
@@ -34,7 +33,6 @@ export const ToolEditPicture = () => {
 	useEffect(() => {
 		const loadFunctions = async () => {
 			const pictureGenUtils = await import("@/utils/pictureGenUtils");
-			setDownloadImage(() => pictureGenUtils.downloadJPG);
 			setGenerateImageFromPDF(() => pictureGenUtils.generateImageFromPDF);
 		};
 
