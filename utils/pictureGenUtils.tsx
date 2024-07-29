@@ -58,7 +58,7 @@ export const generateImageFromPDF = async (
 	}
 };
 
-export const downloadImage = async (
+export const downloadJPG = async (
 	croppedPicture: string,
 	pictureFormat: PictureFormat,
 	printFormat: PrintFormat
@@ -66,7 +66,7 @@ export const downloadImage = async (
 	const dataUrl: string = await generateImageFromPDF(croppedPicture, pictureFormat, printFormat);
 	const link: HTMLAnchorElement = document.createElement("a");
 	link.href = dataUrl;
-	link.download = "document-image.jpg";
+	link.download = "pixpass-print.jpg";
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);

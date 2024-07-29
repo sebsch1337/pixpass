@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Cropper, { Area } from "react-easy-crop";
 import { LucideBadgeAlert, LucideBadgeCheck } from "lucide-react";
 
@@ -16,16 +16,16 @@ import { usePicture } from "@/hooks/usePicture";
 import getCroppedImg from "@/utils/pictureCropUtils";
 
 // Static import not runnning on node <v22 ; Vercel is running on v20 ; using dynamic import below
-// import { downloadImage, generateImageFromPDF } from "@/utils/pictureGenUtils";
+// import { downloadJPG, generateImageFromPDF } from "@/utils/pictureGenUtils";
 
 export const ToolEditPicture = () => {
 	const { approved, message, setApproved, setMessage } = useAi();
 	const { pictureFormat, printFormat } = useFormats();
 	const { picture, setPrintPicture } = usePicture();
-	const { croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } = useCrop();
+	const { croppedPicture, croppedPosition, zoom, setZoom, setCroppedPicture, setCroppedPictureBase64, setCroppedPosition } =
+		useCrop();
 
-	// Import downloadImage & generateImageFromPDF dynamically
-	const [downloadImage, setDownloadImage] = useState<null | typeof import("@/utils/pictureGenUtils").downloadImage>(null);
+	// Import downloadJPG & generateImageFromPDF dynamically
 	const [generateImageFromPDF, setGenerateImageFromPDF] = useState<
 		null | typeof import("@/utils/pictureGenUtils").generateImageFromPDF
 	>(null);
@@ -33,13 +33,27 @@ export const ToolEditPicture = () => {
 	useEffect(() => {
 		const loadFunctions = async () => {
 			const pictureGenUtils = await import("@/utils/pictureGenUtils");
-			setDownloadImage(() => pictureGenUtils.downloadImage);
 			setGenerateImageFromPDF(() => pictureGenUtils.generateImageFromPDF);
 		};
 
 		loadFunctions();
 	}, []);
 	// End dynamic import
+
+	const generatePrintPicture = useCallback(async (): Promise<void> => {
+		if (pictureFormat && printFormat && croppedPicture && generateImageFromPDF) {
+			const generatedPrintPicture = await generateImageFromPDF(croppedPicture, pictureFormat, printFormat);
+			setPrintPicture(generatedPrintPicture);
+		}
+	}, [pictureFormat, printFormat, croppedPicture, generateImageFromPDF, setPrintPicture]);
+
+	useEffect(() => {
+		try {
+			generatePrintPicture();
+		} catch (e) {
+			console.error(e);
+		}
+	}, [pictureFormat, printFormat, generatePrintPicture]);
 
 	const onCropComplete = useDebouncedCallback(async (croppedArea: Area, croppedAreaPixels: Area) => {
 		if (!picture) return;
@@ -49,14 +63,11 @@ export const ToolEditPicture = () => {
 			if (!croppedImageBase64 || !croppedImage) return;
 			setCroppedPicture(croppedImage);
 			setCroppedPictureBase64(croppedImageBase64);
-			if (pictureFormat && printFormat && generateImageFromPDF) {
-				const generatedPrintPicture = await generateImageFromPDF(croppedImage, pictureFormat, printFormat);
-				setPrintPicture(generatedPrintPicture);
-			}
+			await generatePrintPicture();
 		} catch (e) {
 			console.error(e);
 		}
-	}, 500);
+	}, 200);
 
 	const onResetAiCheck = () => {
 		setMessage("");
@@ -65,7 +76,7 @@ export const ToolEditPicture = () => {
 
 	return (
 		<div className="">
-			<h2 className="text-lg font-semibold mb-2">Cut-Out</h2>
+			<h2 className="text-lg font-semibold mb-4">Cut-Out</h2>
 			<div className="w-full flex justify-center">
 				<div className="relative w-full h-[50vh]">
 					{message ? (

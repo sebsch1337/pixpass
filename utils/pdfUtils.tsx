@@ -22,7 +22,7 @@ export const downloadPDF = async (
 	// Create a link element
 	const link = document.createElement("a");
 	link.href = URL.createObjectURL(blob);
-	link.download = "my-document.pdf";
+	link.download = "pixpass-print.pdf";
 
 	// Append the link to the body
 	document.body.appendChild(link);

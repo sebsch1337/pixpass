@@ -21,7 +21,7 @@ export const ToolEditFormat = () => {
 
 	return (
 		<div className="flex-1 flex flex-col">
-			<h2 className="text-lg font-semibold mb-2">Select Dimensions</h2>
+			<h2 className="text-lg font-semibold mb-4">Select Dimensions</h2>
 			<div className="flex gap-4">
 				<div className="flex-1">
 					<h3 className="text-md font-semibold mb-1">Picture Format</h3>

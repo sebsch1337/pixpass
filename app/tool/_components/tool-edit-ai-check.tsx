@@ -20,7 +20,7 @@ import { useAi } from "@/hooks/useAi";
 import { useCrop } from "@/hooks/useCrop";
 import { Input } from "@/components/ui/input";
 
-export const ToolPictureAiCheck = () => {
+export const ToolEditAiCheck = () => {
 	const [loading, setLoading] = useState(false);
 	const [open, setOpen] = useState(false);
 
@@ -49,7 +49,7 @@ export const ToolPictureAiCheck = () => {
 
 	return (
 		<div className="h-full flex flex-col justify-between">
-			<h2 className="text-lg font-semibold mb-2">AI Check 🔒</h2>
+			<h2 className="text-lg font-semibold mb-4">AI Check 🔒</h2>
 			<div className=" w-full h-full flex flex-col justify-center gap-2">
 				<div className="flex-1 flex flex-col md:flex-row gap-2 items-center md:items-start justify-center">
 					{loading && <BounceLoader color="#0ea5e9" />}
