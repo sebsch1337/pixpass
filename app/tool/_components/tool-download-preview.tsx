@@ -22,13 +22,7 @@ export const ToolDownloadPreview: React.FC = () => {
 					className="w-full"
 				/>
 			) : (
-				<Image
-					src="/placeholder.jpeg"
-					width={898}
-					height={602}
-					alt="Preview"
-					className="w-full"
-				/>
+				<p>No image data available</p>
 			)}
 		</div>
 	);
