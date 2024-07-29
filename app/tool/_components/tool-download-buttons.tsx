@@ -1,17 +1,33 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 
 import { useCrop } from "@/hooks/useCrop";
 import { useFormats } from "@/hooks/useFormats";
 
 import { downloadPDF } from "@/utils/pdfUtils";
-import { downloadJPG } from "@/utils/pictureGenUtils";
+
+import { useEffect, useState } from "react";
 
 export const ToolDownloadButtons: React.FC = () => {
 	const { pictureFormat, printFormat } = useFormats();
 	const { croppedPicture } = useCrop();
 
+	// Import downloadJPG & generateImageFromPDF dynamically
+	const [downloadJPG, setDownloadJPG] = useState<null | typeof import("@/utils/pictureGenUtils").downloadJPG>(null);
+
+	useEffect(() => {
+		const loadFunctions = async () => {
+			const pictureGenUtils = await import("@/utils/pictureGenUtils");
+			setDownloadJPG(() => pictureGenUtils.downloadJPG);
+		};
+
+		loadFunctions();
+	}, []);
+	// End dynamic import
+
 	const onDownloadJPG = (): void => {
-		if (!croppedPicture || !pictureFormat || !printFormat) return;
+		if (!croppedPicture || !pictureFormat || !printFormat || !downloadJPG) return;
 
 		downloadJPG(croppedPicture, pictureFormat, printFormat);
 	};
