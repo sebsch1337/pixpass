@@ -70,7 +70,7 @@ export const ToolUploadPicture = () => {
 
 	return (
 		<div>
-			<h2 className="text-lg font-semibold mb-2">Upload Picture</h2>
+			<h2 className="text-lg font-semibold mb-4">Upload Picture</h2>
 			{picture ? (
 				<button
 					onClick={handleUploadClick}
