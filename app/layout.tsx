@@ -13,7 +13,26 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "PixPass",
-	description: "Simply print your passport photos in any size",
+	description: "Simply print your passport photos in any size.",
+	metadataBase: new URL("https://pixpass.vercel.com"),
+	openGraph: {
+		title: "PixPass",
+		type: "website",
+		description: "Simply print your passport photos in any size.",
+		siteName: "PixPass",
+		locale: "en_US",
+		images: [
+			{
+				url: "/og.png",
+				width: 1200,
+				height: 630,
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		images: "/og.png",
+	},
 };
 
 export default function RootLayout({
