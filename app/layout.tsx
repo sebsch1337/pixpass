@@ -11,10 +11,12 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const domainUrl = process?.env?.DOMAIN_URL || process?.env?.VERCEL_URL || "";
+
 export const metadata: Metadata = {
 	title: "PixPass",
 	description: "Simply print your passport photos in any size.",
-	metadataBase: new URL("https://pixpass.vercel.com"),
+	metadataBase: new URL("https://" + domainUrl),
 	openGraph: {
 		title: "PixPass",
 		type: "website",
