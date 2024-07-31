@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { useWindowScroll } from "@mantine/hooks";
+
 import { Button } from "@/components/ui/button";
 
 import { usePicture } from "@/hooks/usePicture";
@@ -9,13 +11,20 @@ export const ToolNavigation = () => {
 	const { picture, printPicture } = usePicture();
 	const { progress, setProgress } = useProgress();
 
+	const [scroll, scrollTo] = useWindowScroll();
+
+	const onPageChange = (page: string): void => {
+		setProgress(page);
+		scrollTo({ y: 0 });
+	};
+
 	return (
 		<>
 			<div className="w-full md:w-auto">
 				{progress === "edit" && (
 					<Button
 						variant="outline"
-						onClick={() => setProgress("upload")}
+						onClick={() => onPageChange("upload")}
 					>
 						&lt; Back
 					</Button>
@@ -23,7 +32,7 @@ export const ToolNavigation = () => {
 				{progress === "download" && (
 					<Button
 						variant="outline"
-						onClick={() => setProgress("edit")}
+						onClick={() => onPageChange("edit")}
 					>
 						&lt; Back
 					</Button>
@@ -33,7 +42,7 @@ export const ToolNavigation = () => {
 				{progress === "upload" && (
 					<Button
 						disabled={!!!picture}
-						onClick={() => setProgress("edit")}
+						onClick={() => onPageChange("edit")}
 					>
 						Next &gt;
 					</Button>
@@ -41,7 +50,7 @@ export const ToolNavigation = () => {
 				{progress === "edit" && (
 					<Button
 						disabled={!!!printPicture}
-						onClick={() => setProgress("download")}
+						onClick={() => onPageChange("download")}
 					>
 						Next &gt;
 					</Button>
