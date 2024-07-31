@@ -8,6 +8,7 @@ export const ToolUploadInfo = () => {
 					<li>High resolution</li>
 					<li>Portrait or square dimensions</li>
 					<li>File type: JPG, PNG or WEBP</li>
+					<li>Max. file size: 2 MB</li>
 				</ul>
 				<br />
 				<p>Passport photos are subject to further requirements based on the desired service.</p>
