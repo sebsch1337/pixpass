@@ -18,6 +18,14 @@ export const ToolUploadPicture = () => {
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 		if (file) {
+			if (file.size > 2 * 1024 * 1024) {
+				toast.error("File size must be less than 2 MB.");
+				if (fileInputRef.current) {
+					fileInputRef.current.value = "";
+				}
+				return;
+			}
+
 			const reader = new FileReader();
 			reader.onloadend = () => {
 				const result = reader.result as string;
