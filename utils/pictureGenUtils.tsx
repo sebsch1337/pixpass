@@ -10,13 +10,20 @@ import { PrintFormat } from "@/types/printFormat";
 
 GlobalWorkerOptions.workerSrc = "./pdf.worker.mjs";
 
+/**
+ * Generates an image from a given PDF document created from the provided picture and formats.
+ *
+ * @param croppedPicture - The URL of the cropped picture to be included in the PDF.
+ * @param pictureFormat - The format of the picture including dimensions.
+ * @param printFormat - The format of the print including dimensions.
+ * @returns A promise that resolves to a data URL representing the generated image in JPEG format.
+ */
 export const generateImageFromPDF = async (
 	croppedPicture: string,
 	pictureFormat: PictureFormat,
 	printFormat: PrintFormat
 ): Promise<string> => {
 	try {
-		// Generate PDF
 		const pdfBlob: Blob = await pdf(
 			<PrintPDF
 				croppedPicture={croppedPicture}
@@ -25,11 +32,9 @@ export const generateImageFromPDF = async (
 			/>
 		).toBlob();
 
-		// Load PDF with pdfjs-dist
 		const pdfDoc: PDFDocumentProxy = await getDocument(await pdfBlob.arrayBuffer()).promise;
 		const page: PDFPageProxy = await pdfDoc.getPage(1);
 
-		// Set up a canvas to render the PDF page
 		const viewport = page.getViewport({ scale: 1 });
 		const canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = viewport.width;
@@ -46,10 +51,8 @@ export const generateImageFromPDF = async (
 			viewport: viewport,
 		};
 
-		// Render the PDF page to canvas
 		await page.render(renderContext).promise;
 
-		// Convert canvas to data URL and download image
 		const dataUrl: string = canvas.toDataURL("image/jpeg", 1.0);
 		return dataUrl;
 	} catch (error) {
@@ -57,6 +60,15 @@ export const generateImageFromPDF = async (
 		return "Error generating and downloading image.";
 	}
 };
+
+/**
+ * Downloads the generated image as a JPEG file.
+ *
+ * @param croppedPicture - The URL of the cropped picture to be included in the PDF.
+ * @param pictureFormat - The format of the picture including dimensions.
+ * @param printFormat - The format of the print including dimensions.
+ * @returns A promise that resolves when the download action is completed.
+ */
 
 export const downloadJPG = async (
 	croppedPicture: string,
