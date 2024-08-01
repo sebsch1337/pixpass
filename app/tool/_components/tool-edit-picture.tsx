@@ -14,6 +14,7 @@ import { useFormats } from "@/hooks/useFormats";
 import { usePicture } from "@/hooks/usePicture";
 
 import getCroppedImg from "@/utils/pictureCropUtils";
+import { toast } from "sonner";
 
 // Static import not runnning on node <v22 ; Vercel is running on v20 ; using dynamic import below
 // import { downloadJPG, generateImageFromPDF } from "@/utils/pictureGenUtils";
@@ -51,7 +52,7 @@ export const ToolEditPicture = () => {
 		try {
 			generatePrintPicture();
 		} catch (e) {
-			console.error(e);
+			toast.error("Something went wrong while generating the print picture.");
 		}
 	}, [pictureFormat, printFormat, generatePrintPicture]);
 
@@ -65,7 +66,7 @@ export const ToolEditPicture = () => {
 			setCroppedPictureBase64(croppedImageBase64);
 			await generatePrintPicture();
 		} catch (e) {
-			console.error(e);
+			toast.error("Something went wrong while cropping the picture.");
 		}
 	}, 200);
 

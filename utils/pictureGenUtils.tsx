@@ -42,7 +42,6 @@ export const generateImageFromPDF = async (
 		const context: CanvasRenderingContext2D | null = canvas.getContext("2d");
 
 		if (!context) {
-			console.error("Failed to get canvas context");
 			throw new Error("Failed to get canvas context");
 		}
 
@@ -56,7 +55,6 @@ export const generateImageFromPDF = async (
 		const dataUrl: string = canvas.toDataURL("image/jpeg", 1.0);
 		return dataUrl;
 	} catch (error) {
-		console.error("Error generating and downloading image:", error);
 		return "Error generating and downloading image.";
 	}
 };
