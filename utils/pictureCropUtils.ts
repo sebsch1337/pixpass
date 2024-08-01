@@ -1,12 +1,24 @@
+/**
+ * Creates an HTMLImageElement from a given URL.
+ *
+ * @param url - The URL of the image to be created.
+ * @returns A promise that resolves to an HTMLImageElement.
+ */
 export const createImage = (url: string): Promise<HTMLImageElement> =>
 	new Promise((resolve, reject) => {
 		const image = new Image();
 		image.addEventListener("load", () => resolve(image));
 		image.addEventListener("error", (error) => reject(error));
-		image.setAttribute("crossOrigin", "anonymous"); // needed to avoid cross-origin issues on CodeSandbox
+		image.setAttribute("crossOrigin", "anonymous");
 		image.src = url;
 	});
 
+/**
+ * Converts degrees to radians.
+ *
+ * @param degreeValue - The value in degrees to be converted.
+ * @returns The equivalent value in radians.
+ */
 export function getRadianAngle(degreeValue: number): number {
 	return (degreeValue * Math.PI) / 180;
 }
@@ -18,6 +30,11 @@ interface Size {
 
 /**
  * Returns the new bounding area of a rotated rectangle.
+ *
+ * @param width - The width of the original rectangle.
+ * @param height - The height of the original rectangle.
+ * @param rotation - The rotation angle in degrees.
+ * @returns The width and height of the bounding box for the rotated rectangle.
  */
 export function rotateSize(width: number, height: number, rotation: number): Size {
 	const rotRad = getRadianAngle(rotation);
@@ -40,6 +57,15 @@ interface Flip {
 	vertical: boolean;
 }
 
+/**
+ * Crops an image based on the specified crop area, rotation, and flip settings.
+ *
+ * @param imageSrc - The source URL of the image to be cropped.
+ * @param pixelCrop - The area of the image to be cropped.
+ * @param rotation - The rotation angle in degrees (default is 0).
+ * @param flip - An object specifying whether to flip the image horizontally and/or vertically (default is no flip).
+ * @returns A promise that resolves to a tuple containing the Base64 string of the cropped image and the blob URL of the cropped image.
+ */
 export default async function getCroppedImg(
 	imageSrc: string,
 	pixelCrop: PixelCrop,
@@ -56,20 +82,16 @@ export default async function getCroppedImg(
 
 	const rotRad = getRadianAngle(rotation);
 
-	// calculate bounding box of the rotated image
 	const { width: bBoxWidth, height: bBoxHeight } = rotateSize(image.width, image.height, rotation);
 
-	// set canvas size to match the bounding box
 	canvas.width = bBoxWidth;
 	canvas.height = bBoxHeight;
 
-	// translate canvas context to a central location to allow rotating and flipping around the center
 	ctx.translate(bBoxWidth / 2, bBoxHeight / 2);
 	ctx.rotate(rotRad);
 	ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
 	ctx.translate(-image.width / 2, -image.height / 2);
 
-	// draw rotated image
 	ctx.drawImage(image, 0, 0);
 
 	const croppedCanvas = document.createElement("canvas");
@@ -79,11 +101,9 @@ export default async function getCroppedImg(
 		return ["", null];
 	}
 
-	// Set the size of the cropped canvas
 	croppedCanvas.width = pixelCrop.width;
 	croppedCanvas.height = pixelCrop.height;
 
-	// Draw the cropped image onto the new canvas
 	croppedCtx.drawImage(
 		canvas,
 		pixelCrop.x,
@@ -96,10 +116,8 @@ export default async function getCroppedImg(
 		pixelCrop.height
 	);
 
-	// As Base64 string
 	const base64String = croppedCanvas.toDataURL("image/jpeg");
 
-	// As a blob URL
 	const blobPromise = new Promise<string>((resolve, reject) => {
 		croppedCanvas.toBlob((file) => {
 			if (file) {
