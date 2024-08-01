@@ -1,6 +1,6 @@
 "use server";
 
-import { uploadAndCheckOpenAI } from "@/lib/openAI";
+import { uploadAndCheckOpenAI } from "@/lib/openAiLib";
 
 import { AiMessage } from "@/types/aiMessage";
 
