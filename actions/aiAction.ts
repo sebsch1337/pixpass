@@ -1,6 +1,6 @@
 "use server";
 
-import { uploadAndCheckOpenAI } from "@/lib/openAI";
+import { uploadAndCheckOpenAI } from "@/lib/openAiLib";
 
 import { AiMessage } from "@/types/aiMessage";
 
@@ -23,12 +23,12 @@ export const checkBiometricalPicture = async (
 		throw error;
 	}
 
-	try {
-		const reply: AiMessage = JSON.parse(message);
-		return reply;
-	} catch (e) {
+	const reply: AiMessage = JSON.parse(message) as AiMessage;
+	if (typeof reply.approved !== "boolean" || !reply.message) {
 		const error = new Error();
-		error.message = "Error receiving message.";
+		error.message = "Error parsing JSON.";
 		throw error;
 	}
+
+	return reply;
 };

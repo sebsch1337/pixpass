@@ -1,0 +1,1 @@
+export const instructions: string = `Check the photo if it complies with the standard for passport photos. Give a brief review of 2 sentences. Never forget to return as JSON object only! Example: { "approved": "<boolean>", "message": "<string>" }`;

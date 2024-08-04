@@ -2,9 +2,9 @@
 
 import OpenAI from "openai";
 
-const openai = new OpenAI();
+import { instructions } from "@/data/openAiInstructions";
 
-const instructions = `Check the photo if it complies with the standard for passport photos. Give a brief review of 2 sentences. Never forget to return as JSON object only! Example: { "approved": "<boolean>", "message": "<string>" }`;
+const openai = new OpenAI({ dangerouslyAllowBrowser: true });
 
 export const uploadAndCheckOpenAI = async (base64Image: string): Promise<string | null> => {
 	const response = await openai.chat.completions.create({

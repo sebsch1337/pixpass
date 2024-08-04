@@ -40,7 +40,6 @@ export const ToolEditAiCheck = () => {
 			setApproved(reply.approved);
 		} catch (e) {
 			const error = e as Error;
-			console.error(error);
 			toast.error(error?.message || "Something went wrong. Please try again later.");
 		} finally {
 			setLoading(false);
