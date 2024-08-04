@@ -1,5 +1,8 @@
-import { uploadAndCheckOpenAI, instructions } from "../openAiLib";
 import OpenAI from "openai";
+
+import { uploadAndCheckOpenAI } from "../openAiLib";
+
+import { instructions } from "@/data/openAiInstructions";
 
 jest.mock("openai");
 
