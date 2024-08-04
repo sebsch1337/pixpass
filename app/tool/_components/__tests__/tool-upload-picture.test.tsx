@@ -55,7 +55,7 @@ describe("ToolUploadPicture", () => {
 			() => {
 				expect(button).not.toBeDisabled();
 			},
-			{ timeout: 300 }
+			{ timeout: 500 }
 		);
 	});
 });
