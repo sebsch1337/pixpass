@@ -36,6 +36,11 @@ export const ToolEditAiCheck = () => {
 
 		try {
 			const reply = await checkBiometricalPicture(croppedPictureBase64, accessCode);
+			if (typeof reply === "string") {
+				const error = new Error();
+				error.message = reply;
+				throw error;
+			}
 			setMessage(reply.message);
 			setApproved(reply.approved);
 		} catch (e) {
