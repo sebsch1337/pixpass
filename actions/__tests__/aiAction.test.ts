@@ -22,7 +22,8 @@ describe("checkBiometricalPicture", () => {
 		const base64Image = "base64string";
 		const inputAccessCode = "wrong-code";
 
-		await expect(checkBiometricalPicture(base64Image, inputAccessCode)).rejects.toThrow("Wrong access code.");
+		const result = await checkBiometricalPicture(base64Image, inputAccessCode);
+		expect(result).toEqual("Wrong access code.");
 	});
 
 	it("throws an error if uploadAndCheckOpenAI returns null", async () => {
@@ -30,7 +31,8 @@ describe("checkBiometricalPicture", () => {
 		const inputAccessCode = process.env.ACCESS_CODE || "";
 		(uploadAndCheckOpenAI as jest.Mock).mockResolvedValue(null);
 
-		await expect(checkBiometricalPicture(base64Image, inputAccessCode)).rejects.toThrow("Error receiving message.");
+		const result = await checkBiometricalPicture(base64Image, inputAccessCode);
+		expect(result).toEqual("Error receiving message.");
 	});
 
 	it("throws an error if reply.approved is not boolean or reply.message is empty or doesn't exist", async () => {
@@ -39,7 +41,8 @@ describe("checkBiometricalPicture", () => {
 		const invalidAiMessage = { approved: "true", message: "" };
 		(uploadAndCheckOpenAI as jest.Mock).mockResolvedValue(JSON.stringify(invalidAiMessage));
 
-		await expect(checkBiometricalPicture(base64Image, inputAccessCode)).rejects.toThrow("Error parsing JSON.");
+		const result = await checkBiometricalPicture(base64Image, inputAccessCode);
+		expect(result).toEqual("Error parsing JSON.");
 	});
 
 	it("returns a parsed AiMessage if everything is correct", async () => {
