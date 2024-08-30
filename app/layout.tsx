@@ -15,12 +15,12 @@ const domainUrl = process?.env?.DOMAIN_URL || process?.env?.VERCEL_URL || "";
 
 export const metadata: Metadata = {
 	title: "PixPass",
-	description: "Simply print your passport photos in any size.",
+	description: "Self-Print Passport Photos, Verified by AI.",
 	metadataBase: new URL("https://" + domainUrl),
 	openGraph: {
 		title: "PixPass",
 		type: "website",
-		description: "Simply print your passport photos in any size.",
+		description: "Self-Print Passport Photos, Verified by AI.",
 		siteName: "PixPass",
 		locale: "en_US",
 		images: [

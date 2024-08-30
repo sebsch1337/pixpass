@@ -1,12 +1,13 @@
 <p align="center"><img width="150" alt="image" src="./logo.svg"></p>
 
 <h3 align="center">PixPass</h3>
-<p align="center">Simply print your passport photos in any size</p>
+<p align="center">Self-Print Passport Photos, Verified by AI</p>
 <p align="center"><a href="https://pixpass.vercel.app/">https://pixpass.vercel.app/</a></p>
 
 ## Overview
 
-Create a picture collage for printing your passport photos at home or at printing services like DM Fotoparadies, Rossmann, and more. Ensure your photo meets biometric requirements with my AI compliance check.
+Create a picture collage for printing your passport photos at home or at printing services like DM Fotoparadies, Rossmann, and more. Ensure your photo meets biometric requirements with the AI compliance check.
+Code for AI feature: _asx135_
 
 ## Features
 
@@ -16,14 +17,14 @@ Create a picture collage for printing your passport photos at home or at printin
 - Let AI check your biometrics
 - Download a printable JPG or PDF
 
-## Used Tech Stack
+## Tech Stack
 
-- Next.JS 14
-- TypeScript for typesafe developing
-- TailwindCSS for styling
-- Shadcn as dialog component
-- OpenAI API for image recognition
-- react-pdf for pdf creation
+- **Next.JS 14**
+- **TypeScript** for typesafe developing
+- **TailwindCSS** for styling
+- **Shadcn** as dialog component
+- **OpenAI API** for image recognition
+- **react-pdf** for pdf creation
 
 ## Getting Started
 
