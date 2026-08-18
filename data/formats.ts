@@ -6,6 +6,7 @@ export const pictureFormats: PictureFormat[] = [
 	{ id: "2520", name: "25x20mm", width: 25, height: 20 },
 	{ id: "2525", name: "25x25mm (1x1in)", width: 25.4, height: 25.4 },
 	{ id: "2530", name: "25x30mm", width: 25, height: 30 },
+	{ id: "2535", name: "25x35mm", width: 25, height: 35 },
 	{ id: "3040", name: "30x40mm", width: 30, height: 40 },
 	{ id: "3226", name: "32x26mm", width: 32, height: 26 },
 	{ id: "3348", name: "33x48mm", width: 33, height: 48 },
