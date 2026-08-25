@@ -11,15 +11,15 @@ describe("Footer", () => {
 		render(<Footer />);
 
 		const madeWithText = screen.getByText("Made with 🍣");
+		const legalNoticeLink = screen.getByText("Legal Notice");
 		const privacyPolicyLink = screen.getByText("Privacy Policy");
 		const termsOfServiceLink = screen.getByText("Terms of Service");
-		const separator = screen.getByText("-");
 
 		expect(madeWithText).toBeInTheDocument();
+		expect(legalNoticeLink.closest("a")).toHaveAttribute("href", "/legal");
 		expect(privacyPolicyLink).toBeInTheDocument();
 		expect(privacyPolicyLink.closest("a")).toHaveAttribute("href", "/privacy");
 		expect(termsOfServiceLink).toBeInTheDocument();
 		expect(termsOfServiceLink.closest("a")).toHaveAttribute("href", "/terms");
-		expect(separator).toBeInTheDocument();
 	});
 });

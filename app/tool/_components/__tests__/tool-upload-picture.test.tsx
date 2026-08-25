@@ -34,20 +34,20 @@ describe("ToolUploadPicture", () => {
 
 	it("renders correctly", () => {
 		render(<ToolUploadPicture />);
-		expect(screen.getByRole("heading", { name: /upload picture/i })).toBeInTheDocument();
-		expect(screen.getByRole("button", { name: /upload picture/i })).toBeInTheDocument();
+		expect(screen.getByRole("heading", { name: /select picture/i })).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: /select picture/i })).toBeInTheDocument();
 	});
 
 	it("disables and re-enables the upload button based on state", async () => {
 		render(<ToolUploadPicture />);
 
 		// Initially, the button should not be disabled
-		let button = screen.getByRole("button", { name: /upload picture/i });
+		let button = screen.getByRole("button", { name: /select picture/i });
 		expect(button).not.toBeDisabled();
 
 		// Simulate the button being disabled
 		fireEvent.click(button);
-		button = screen.getByRole("button", { name: /upload picture/i });
+		button = screen.getByRole("button", { name: /select picture/i });
 		expect(button).toBeDisabled();
 
 		// Simulate re-enabling the button after timeout

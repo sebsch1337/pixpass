@@ -9,9 +9,9 @@ export const FeaturesSection = () => {
 			</div>
 			<div className="flex-1">
 				<h2 className="text-3xl font-bold bg-gradient-to-r from-sky-950 to-sky-400 inline-block bg-clip-text text-transparent">
-					AI Check
+					Local Processing
 				</h2>
-				<p className="text-xl font-semibold text-sky-950">for biometrics</p>
+				<p className="text-xl font-semibold text-sky-950">in your browser</p>
 			</div>
 			<div className="flex-1">
 				<h2 className="text-3xl font-bold  bg-gradient-to-r from-sky-950 to-sky-400 inline-block bg-clip-text text-transparent">

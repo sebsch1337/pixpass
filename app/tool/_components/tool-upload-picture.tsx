@@ -78,13 +78,13 @@ export const ToolUploadPicture = () => {
 
 	return (
 		<div>
-			<h2 className="text-lg font-semibold mb-4">Upload Picture</h2>
+			<h2 className="text-lg font-semibold mb-4">Select Picture</h2>
 			{picture ? (
 				<button
 					onClick={handleUploadClick}
 					className="flex justify-center w-full"
 					disabled={isButtonDisabled}
-					aria-label="Upload picture"
+					aria-label="Select picture"
 				>
 					{/* eslint-disable-next-line */}
 					<img
@@ -98,10 +98,10 @@ export const ToolUploadPicture = () => {
 					onClick={handleUploadClick}
 					className="w-full min-h-[50vh] border-2 border-dashed border-sky-600 text-sky-600 rounded-xl flex flex-col justify-center items-center text-lg text-center font-semibold"
 					disabled={isButtonDisabled}
-					aria-label="Upload picture"
+					aria-label="Select picture"
 				>
 					<span className="text-3xl">+</span>
-					Upload Picture
+					Select Picture
 				</button>
 			)}
 			<input
