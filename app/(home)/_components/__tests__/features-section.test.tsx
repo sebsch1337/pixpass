@@ -8,15 +8,15 @@ describe("FeaturesSection", () => {
 
 		const noLoginHeading = screen.getByText("No Login");
 		const noLoginText = screen.getByText("required");
-		const aiCheckHeading = screen.getByText("AI Check");
-		const aiCheckText = screen.getByText("for biometrics");
+		const localProcessingHeading = screen.getByText("Local Processing");
+		const localProcessingText = screen.getByText("in your browser");
 		const downloadHeading = screen.getByText("Download");
 		const downloadText = screen.getByText("JPG and PDF");
 
 		expect(noLoginHeading).toBeInTheDocument();
 		expect(noLoginText).toBeInTheDocument();
-		expect(aiCheckHeading).toBeInTheDocument();
-		expect(aiCheckText).toBeInTheDocument();
+		expect(localProcessingHeading).toBeInTheDocument();
+		expect(localProcessingText).toBeInTheDocument();
 		expect(downloadHeading).toBeInTheDocument();
 		expect(downloadText).toBeInTheDocument();
 	});

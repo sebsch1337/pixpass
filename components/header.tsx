@@ -1,11 +1,9 @@
 import { Logo } from "./logo";
-import { Navigation } from "./navigation";
 
 export const Header: React.FC = () => {
 	return (
-		<header className="w-full py-8 px-8 flex justify-between">
+		<header className="flex w-full px-8 py-8">
 			<Logo />
-			<Navigation />
 		</header>
 	);
 };

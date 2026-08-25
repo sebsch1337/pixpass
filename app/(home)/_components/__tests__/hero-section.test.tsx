@@ -22,13 +22,13 @@ describe("HeroSection", () => {
 		const heading = screen.getByText(/Simply print your/i);
 		const description = screen.getByText(/Upload your picture/i);
 		const startNowButton = screen.getByText(/Start now/i);
-		const pricingText = screen.getByText(/1 picture free - 3 for only 4.99\$/i);
+		const freeUsageText = screen.getByText(/Free to use — no payment required\./i);
 		const printPictures = screen.getAllByTestId("print-picture");
 
 		expect(heading).toBeInTheDocument();
 		expect(description).toBeInTheDocument();
 		expect(startNowButton).toBeInTheDocument();
-		expect(pricingText).toBeInTheDocument();
+		expect(freeUsageText).toBeInTheDocument();
 		expect(printPictures).toHaveLength(2);
 	});
 });

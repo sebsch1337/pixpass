@@ -38,7 +38,7 @@ export const HeroSection = () => {
 							Start now
 						</Button>
 					</Link>
-					<p className="text-xs font-light text-sky-950 mt-2">1 picture free - 3 for only 4.99$!</p>
+					<p className="mt-2 text-xs font-light text-sky-950">Free to use — no payment required.</p>
 				</div>
 			</div>
 
